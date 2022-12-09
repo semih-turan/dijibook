@@ -1,0 +1,17 @@
+const colors = {
+  light: {
+    primary: '#fff',
+    secondary: '#fff',
+    accent: '#f00',
+    error: '#f00',
+    warning: '#ff0',
+    info: '#00f',
+  },
+  dark:{},
+};
+
+export default colors;
+style={{
+        color: colors[theme].primary,
+        backgroundColor: colors[theme].error,
+      }}
