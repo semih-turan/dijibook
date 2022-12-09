@@ -94,6 +94,7 @@ export const requestAddProductToFirebase = payload => async (dispatch, getState)
   } else {
   }
 };
+
 export const requestGetAllPRoductsFromFirebase = payload => async (dispatch, getState) => {
   const { userInfo } = getState().app;
 
