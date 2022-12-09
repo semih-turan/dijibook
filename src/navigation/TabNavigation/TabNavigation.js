@@ -1,13 +1,14 @@
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import Favorites from '../Favorites';
-import Home from '../Home';
-import Search from '../Search';
-import colors from '~/themes/colors';
 import { View, Text } from 'react-native';
 import styles from './TabNavigation.style';
-import { color } from 'react-native-reanimated';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import Favorites from '~/screens/Favorites';
+import Home from '~/screens/Home';
+import Search from '~/screens/Search';
+import colors from '~/themes/colors';
 
 const Tabs = createBottomTabNavigator();
 
@@ -36,9 +37,7 @@ const TabNavigation = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: homeIcon,
-          tabBarActiveTintColor: colors.orange,
-          tabBarInactiveTintColor: colors.black,
+          tabBarIcon: homeIcon, tabBarActiveTintColor: colors.orange, tabBarInactiveTintColor: colors.black,
           header: () => (
             <View style={styles.container}>
               <Text style={styles.text}>Home</Text>
@@ -50,9 +49,7 @@ const TabNavigation = () => {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: searchIcon,
-          tabBarActiveTintColor: colors.orange,
-          tabBarInactiveTintColor: colors.black,
+          tabBarIcon: searchIcon, tabBarActiveTintColor: colors.orange, tabBarInactiveTintColor: colors.black,
           header: () => (
             <View style={styles.container}>
               <Text style={styles.text}>Search</Text>

@@ -5,6 +5,7 @@ import {
 } from 'dynamsoft-capture-vision-react-native';
 import Entypo from 'react-native-vector-icons/MaterialCommunityIcons';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import styles from './BarkodRead.style';
 
 const option = {
     mediaType: 'photo',
@@ -143,13 +144,13 @@ class BarcodeScanner extends React.Component {
 
     render() {
         let barcode_text = '';
-        // let region = {
-        //   regionTop: 30,
-        //   regionLeft: 15,
-        //   regionBottom: 70,
-        //   regionRight: 85,
-        //   regionMeasuredByPercentage: true,
-        // };       // Define the scan region.
+        let region = {
+            regionTop: 30,
+            regionLeft: 15,
+            regionBottom: 70,
+            regionRight: 85,
+            regionMeasuredByPercentage: true,
+        };       // Define the scan region.
         let results = this.state.results;
         if (results && results.length > 0) {
             for (var i = 0; i < results.length; i++) {
@@ -160,19 +161,15 @@ class BarcodeScanner extends React.Component {
 
         return (
             <DCVCameraView
-                style={{
-                    flex: 1,
-                }}
-                ref={ref => {
-                    this.scanner = ref;
-                }}
+                style={{ flex: 1, }}
+                ref={ref => { this.scanner = ref; }}
                 overlayVisible={true}
                 torchButton={{
                     visible: true,
                 }}
                 torchState={EnumTorchState.OFF}
-            // scanRegionVisible={true}
-            // scanRegion={region}  // Set scan region.
+                scanRegionVisible={true}
+                scanRegion={region}  // Set scan region.
             >
                 <Text
                     style={{
@@ -207,36 +204,6 @@ class BarcodeScanner extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        backgroundColor: '#00000000',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    modalView: {
-        margin: 20,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        padding: 35,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    modalText: {
-        textAlign: 'center',
-    },
-    headerRight: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-});
+
 
 export default BarcodeScanner;

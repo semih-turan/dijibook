@@ -2,28 +2,33 @@ import { StyleSheet } from 'react-native';
 import { spacing } from '~/configs';
 
 export default StyleSheet.create({
-    container: {
+    centeredView: {
         flex: 1,
+        backgroundColor: '#00000000',
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'gray',
-        borderRadius: 8,
-        backgroundColor: '#ffffff',
+        marginTop: 20,
     },
-    body_container: {
-        width: '70%',
-        marginVertical: spacing.xs,
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
         alignItems: 'center',
-        borderRadius: 8,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
     },
-    text_input: {
-        margin: spacing.xxs,
+    modalText: {
+        textAlign: 'center',
     },
-    logo: {
-        alignSelf: 'center',
-        resizeMode: 'contain',
-        alignItems: 'center',
-        borderRadius: 100,
-        marginVertical: spacing.xs,
+    headerRight: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 });
