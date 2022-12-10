@@ -2,8 +2,26 @@
 import { Image, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './DetailsCard.style';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { connect } from 'react-redux';
 
-const DetailsCard = ({ books }) => {
+import {  firebaseFavoritesListener,  requestAddFavoriteToFirebase} from '~/redux/actions/app';
+const mapStateToProps = states => ({ app: states.app });
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const DetailsCard = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(props => {
+  const { app, dispatch , books } = props; 
+  
+  const addFavorite = item => {
+    console.log("addFavorite:"+item);
+    // dispatch(requestAddFavoriteToFirebase(item));
+  };
+  const addMyBook = item => {
+    console.log(item);
+    dispatch(requestAddFavoriteToFirebase(item));
+  };
   return (
     <ScrollView style={styles.background}>
       <View style={styles.container}>
@@ -62,12 +80,12 @@ const DetailsCard = ({ books }) => {
             )}
             <View style={styles.button_container}>
               <View style={styles.addBook}>
-                <TouchableOpacity onPress={books.key}>
+                <TouchableOpacity onPress={() => addMyBook(books.key)}>
                   <Text style={styles.addBookText}>Add Book</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.addFav}>
-                <TouchableOpacity onPress={books.key}>
+                <TouchableOpacity onPress={() => addFavorite(books.key)}>
                   <Icon name="bookmark-plus" size={40} color="white" />
                 </TouchableOpacity>
               </View>
@@ -79,6 +97,6 @@ const DetailsCard = ({ books }) => {
       </View>
     </ScrollView>
   );
-};
+});
 
 export default DetailsCard;

@@ -4,8 +4,8 @@ const initialState = {
   selectedTheme: 'dark', //dark | light
 
   defaultParameter: false,
-  username: '',
-  password: '',
+  username: 'saslan@gmail.com',
+  password: '12345678',
   userInfo: {},
   books:[],
   loginStatus: false,

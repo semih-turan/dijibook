@@ -2,11 +2,11 @@ import database from '@react-native-firebase/database';
 
 export const addFavoriteToFirebase = async (item, uid) => {
     try {       
-        const key = item.id;
         //item id de itemin yükleme keyi olmalı yada item keyi gönderilmelidir
 
         const favorite = database().ref(`/user_favorites/${uid}`).push();
-        await favorite.set(key);
+        console.log(favorite);
+        await favorite.set(item);
 
         const val = { key: favorite.key };
 

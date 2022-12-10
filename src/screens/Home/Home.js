@@ -18,7 +18,7 @@ const Home = connect(
   const { dispatch, app, navigation } = props;
   const a = JSON.stringify(app.books);
 
-  const [contentList, setContentList] = React.useState(a);
+  const [contentList, setContentList] = React.useState(app.books);
   const [list, setList] = React.useState('');
   const [activeAll, setActiveAll] = React.useState(true);
   const [activeRoman, setActiveRoman] = React.useState(false);
@@ -29,12 +29,11 @@ const Home = connect(
 
   const handleOnPress = book => {
     props.navigation.navigate('Details', book);
-    const a = JSON.stringify(book);
-    console.log("book:" + a);
+    console.log("Home :"+book);  
   };
 
-  useEffect(() => {
-    dispatch(requestAllProducts());
+  useEffect(() => { 
+    dispatch(requestAllProducts());   
   }, []);
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
