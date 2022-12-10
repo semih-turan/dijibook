@@ -19,6 +19,9 @@ const Search = ({ navigation, route }) => {
         const parsedData = parseContentData(contentData || {});
         setContentList(parsedData);
         setList(parsedData);
+        if (barcodeText != undefined) {
+          handleSearch(barcodeText);
+        }
       });
   }, []);
   // navigation alacak.
