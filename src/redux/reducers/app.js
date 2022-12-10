@@ -34,6 +34,21 @@ const app = (state = initialState, { type, payload, key, value }) => {
     case constants.FIREBASE_PRODUCTS_LISTENER: {
       return { ...state, };
     }
+
+    case constants.REQUEST_GET_FAVORITES_FB: {
+      console.log('PAYLOAD', payload);
+      return {
+        ...state,
+        fbFavorites: payload,
+      };
+    }
+
+    case constants.FIREBASE_FAVORITES_LISTENER: {
+      return {
+        ...state,
+      };
+    }
+
     default:
       return state;
   }
