@@ -28,13 +28,14 @@ const Home = connect(
 
   const handleOnPress = book => {
     props.navigation.navigate('Details', book);
+    const a = JSON.stringify(book);
+    console.log("book:" + a);
   };
 
   useEffect(() => {
     dispatch(requestAllProducts());
   }, []);
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
-
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
   const handleSelectedAll = category => {
     const filtered = list;

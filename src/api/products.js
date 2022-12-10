@@ -4,9 +4,12 @@ export const getAllProducts = async() => {
   try {
     const books = await (await database().ref('/books').once('value')).val();
     let allBooks = [];
+    // const a = JSON.stringify(allBooks);
+    // console.log("book:" + a);
     Object.keys(books).map(key => {
-      allBooks.push(books[key]);
+      allBooks.push({...books[key],key});      
     });    
+
     return { data: allBooks, success: true };
   } catch (error) {
     console.error(error);
