@@ -9,6 +9,7 @@ import Favorites from '~/screens/Favorites';
 import Home from '~/screens/Home';
 import Search from '~/screens/Search';
 import colors from '~/themes/colors';
+import ReduxDeneme from '~/screens/Redux';
 
 const Tabs = createBottomTabNavigator();
 

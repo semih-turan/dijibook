@@ -14,12 +14,13 @@ const Search = ({ navigation, route }) => {
   React.useEffect(() => {
     database()
       .ref('/books')
-      .on('value', snapshot => {
+      .once('value', snapshot => {
         const contentData = snapshot.val();
         const parsedData = parseContentData(contentData || {});
         setContentList(parsedData);
         setList(parsedData);
-      });
+        handleSearch("9786055340629"); 
+      });      
   }, []);
   // navigation alacak.
   const [list, setList] = useState(contentList); // useState içerisine firebase'den books gelecek.
@@ -28,6 +29,7 @@ const Search = ({ navigation, route }) => {
   };
   const renderBooks = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />; // handleOnPress item prop'unu alacak.
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
+  
   const handleSearch = text => {
     const filteredBook = contentList.filter(book => {
       const searchedText = text.toLowerCase();

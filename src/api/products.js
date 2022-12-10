@@ -1,23 +1,19 @@
 import database from '@react-native-firebase/database';
 
-export const getAllProducts = async uid => { 
+export const getAllProducts = async() => { 
   try {
-    let keys = (await database().ref(`/books`).once('value')).val();
-    keys = Object.values(keys);
-    console.log(keys);
-    const products = [];
-
-    for (let i = 0; i < keys.length; i++) {
-      products.push((await getPRoductFromFirebase(keys[i])).data);
-    }
-
-    return { data: products, success: true };
+    const books = await (await database().ref('/books').once('value')).val();
+    let allBooks = [];
+    Object.keys(books).map(key => {
+      allBooks.push(books[key]);
+    });    
+    return { data: allBooks, success: true };
   } catch (error) {
     console.error(error);
   }
 
   return { data: null, success: false };
-  };
+};
 
 export const addProductToFirebase = async (item, uid) => {
   try {
