@@ -30,7 +30,7 @@ const TabNavigation = () => {
       screenOptions={{
         tabBarLabelStyle: { fontSize: 12, marginBottom: 8, color: colors.orange, fontFamily: 'Montserrat-ExtraBold' },
         tabBarItemStyle: { alignItems: 'center', backgroundColor: colors.white },
-        tabBarStyle: { backgroundColor: 'red', height: 60 },
+        tabBarStyle: { backgroundColor: colors.white, height: 60 },
       }}>
       <Tabs.Screen
         name="Home"

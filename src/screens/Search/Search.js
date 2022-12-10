@@ -31,6 +31,15 @@ const Search = ({navigation}) => {
     const filteredBook = contentList.filter(book => {
       const searchedText = text.toLowerCase();
       const currentBookName = book.bookName.toLowerCase();
+      const currentIsbn = book.isbn;
+      const currentAuthor = book.author.toLowerCase();
+      const currentPublisher = book.publisher.toLowerCase();
+      return (
+        currentBookName.indexOf(searchedText) > -1 ||
+        currentIsbn.indexOf(searchedText) > -1 ||
+        currentAuthor.indexOf(searchedText) > -1 ||
+        currentPublisher.indexOf(searchedText) > -1
+      );
       return currentBookName.indexOf(searchedText) > -1;
     });
     setList(filteredBook);
