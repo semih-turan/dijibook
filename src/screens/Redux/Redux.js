@@ -17,7 +17,6 @@ const Redux = connect(
     mapDispatchToProps,
 )(props => {
     const { dispatch, app } = props;
-    console.log("Dispach:" + app);
     useEffect(() => {
         dispatch(requestAllProducts());
     }, []);
@@ -25,15 +24,16 @@ const Redux = connect(
     const renderContent = ({ item }) => (
         <BookCard book={item} onPress={() => handleOnPress()} />
     );
-    console.log("item:" + app);
+    const a = JSON.stringify(app.books)
+    console.log("Redux Sayfa:" + a);
 
-
+ 
 
 
     return (
         <View style={styles.container}>
             {/* <Button icon="bookmark" text="Ekle" onPress={sendContent}/> */}
-            <FlatList data={app} renderItem={renderContent} numColumns={3} />
+            <FlatList data={app.books} renderItem={renderContent} numColumns={3} />
         </View>
     );
 });

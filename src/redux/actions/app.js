@@ -71,9 +71,8 @@ export const logoutUserWithFB = payload => async (dispatch, getState) => {
   }
 };
 
-export const requestAllProducts = payload => async (dispatch, getState) => {
-  const { data, success } = await products.getAllProducts(userInfo.user.uid);
-
+export const requestAllProducts = payload => async dispatch => {
+  const { data, success } = await products.getAllProducts();
   if (success) {
     dispatch({
       type: constants.REQUEST_GET_ALL_PRODUCTS_WITH_FB,

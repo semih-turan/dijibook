@@ -36,7 +36,7 @@ const TabNavigation = () => {
       }}>
       <Tabs.Screen
         name="Home"
-        component={ReduxDeneme}
+        component={Home}
         options={{
           tabBarIcon: homeIcon, tabBarActiveTintColor: colors.orange, tabBarInactiveTintColor: colors.black,
           header: () => (
