@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import React, { useState } from 'react';
 import { FlatList, View, ScrollView, TouchableWithoutFeedback, Text, TouchableOpacity } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
@@ -8,8 +7,10 @@ import SearchBar from '~/components/SearchBar';
 import styles from './Search.style';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Search = ({navigation}) => {
+const Search = ({ navigation, route }) => {
   const [contentList, setContentList] = React.useState([]);
+
+  const barcodeText = route.params?.barcode_text;
   React.useEffect(() => {
     database()
       .ref('/books')
@@ -20,7 +21,6 @@ const Search = ({navigation}) => {
         setList(parsedData);
       });
   }, []);
-
   // navigation alacak.
   const [list, setList] = useState(contentList); // useState içerisine firebase'den books gelecek.
   const handleOnPress = book => {
@@ -45,12 +45,16 @@ const Search = ({navigation}) => {
     });
     setList(filteredBook);
   };
+  const handleOnPressBarcode = () => {
+    navigation.navigate('BarcodeRead');
+  };
+
   return (
     <View>
       <View style={styles.searchbar}>
         <SearchBar onSearch={handleSearch} />
         <View style={styles.barcode}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleOnPressBarcode}>
             <Icon name="barcode" size={56} color="black" />
           </TouchableOpacity>
         </View>
