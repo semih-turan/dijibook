@@ -3,7 +3,8 @@ import { Text, View, SafeAreaView, ScrollView } from 'react-native';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import database from '@react-native-firebase/database';
+import { connect } from 'react-redux';
+import { firebaseProductsListener, requestAddProductToFirebase, requestGetAllPRoductsFromFirebase, setApp } from '~/redux/actions';
 
 import styles from "./AddBook.style";
 import Button from "~/components/Button";
@@ -23,40 +24,48 @@ const initialFormValues = {
   publisher: '',
   text: '',
   title: '',
+  id: "",
 };
 
 const SignupSchema = Yup.object().shape({
   author: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-  bookName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+  bookName: Yup.string().min(2, 'Too Short!').max(90, 'Too Long!').required('Required'),
   category: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   interpreter: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   isbn: Yup.string().min(8, 'Too Short!').max(15, 'Too Long!').required('Required'),
   image: Yup.string().url('Invalid Url').required('Required'),
 });
-const AddBook = () => {
 
+const mapStateToProps = states => ({ app: states.app });
+const mapDispatchToProps = dispatch => ({ dispatch });
 
-  async function handleFormSubmit(formValues) {
-    console.log(formValues);
-    database().ref('Data/').push(formValues);
-  }
+const AddBook = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(props => {
+  const { app, dispatch } = props;
+
+  const handleFormSubmit = formValues => {
+    formValues.id = formValues.isbn;
+    dispatch(requestAddProductToFirebase(formValues));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <Formik initialValues={initialFormValues} onSubmit={handleFormSubmit} validationSchema={SignupSchema} >
-        {({ values, handleChange, handleSubmit,errors }) => (<>
+        {({ values, handleChange, handleSubmit, errors }) => (<>
           <ScrollView>
             <Input placeholder="Author" value={values.author} onChangeText={handleChange('author')} iconName="bookmark" />
-              {errors.author && (<Text>{errors.author}</Text>)}
+            {errors.author && (<Text>{errors.author}</Text>)}
             <Input placeholder="Book Name" value={values.bookName} onChangeText={handleChange('bookName')} iconName="bookmark" />
-              {errors.bookName && (<Text>{errors.bookName}</Text>)}
+            {errors.bookName && (<Text>{errors.bookName}</Text>)}
             <Input placeholder="Category" value={values.category} onChangeText={handleChange('category')} iconName="bookmark" />
-              {errors.category && (<Text>{errors.category}</Text>)}
+            {errors.category && (<Text>{errors.category}</Text>)}
             <Input placeholder="Image url input" value={values.image} onChangeText={handleChange('image')} iconName="bookmark" />
-              {errors.image && (<Text>{errors.image}</Text>)}
+            {errors.image && (<Text>{errors.image}</Text>)}
             <Input placeholder="Interpreter" value={values.interpreter} onChangeText={handleChange('interpreter')} iconName="bookmark" />
             <Input placeholder="Isbn" value={values.isbn} onChangeText={handleChange('isbn')} iconName="bookmark" />
-              {errors.isbn && (<Text>{errors.isbn}</Text>)}
+            {errors.isbn && (<Text>{errors.isbn}</Text>)}
             <Input placeholder="Language" value={values.language} onChangeText={handleChange('language')} iconName="bookmark" />
             <Input placeholder="Pages" value={values.pages} onChangeText={handleChange('pages')} iconName="bookmark" />
             <Input placeholder="Price" value={values.price} onChangeText={handleChange('price')} iconName="bookmark" />
@@ -71,7 +80,7 @@ const AddBook = () => {
 
     </SafeAreaView>
   )
-}
+});
 
 
 export default AddBook;
