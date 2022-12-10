@@ -9,6 +9,7 @@ import Favorites from '~/screens/Favorites';
 import Home from '~/screens/Home';
 import Search from '~/screens/Search';
 import colors from '~/themes/colors';
+import ReduxDeneme from '~/screens/Redux';
 
 const Tabs = createBottomTabNavigator();
 
@@ -35,7 +36,7 @@ const TabNavigation = () => {
       }}>
       <Tabs.Screen
         name="Home"
-        component={Home}
+        component={ReduxDeneme}
         options={{
           tabBarIcon: homeIcon, tabBarActiveTintColor: colors.orange, tabBarInactiveTintColor: colors.black,
           header: () => (
