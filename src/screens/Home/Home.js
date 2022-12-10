@@ -1,14 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React,{useEffect} from 'react';
 import { FlatList, View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
 import styles from './Home.style';
-import database from '@react-native-firebase/database';
 import Button from '~/components/Button';
-import parseContentData from '~/utils/contentData';
 import { colors } from '~/themes';
+import { connect } from 'react-redux';
+import { requestAllProducts } from '~/redux/actions/app';
 
-const Home = ({ navigation }) => {
+const mapStateToProps = states => ({ app: states.app });
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const Home = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(props => {
+  const { dispatch, app, navigation } = props;
+
   const [contentList, setContentList] = React.useState([]);
   const [list, setList] = React.useState('');
   const [activeAll, setActiveAll] = React.useState(true);
@@ -19,20 +27,13 @@ const Home = ({ navigation }) => {
   const [activeEdebiyat, setActiveEdebiyat] = React.useState(false);
 
   const handleOnPress = book => {
-    navigation.navigate('Details', book);
+    props.navigation.navigate('Details', book);
   };
 
-  React.useEffect(() => {
-    database()
-      .ref('/books')
-      .on('value', snapshot => {
-        const contentData = snapshot.val();
-        const parsedData = parseContentData(contentData || {});
-        setContentList(parsedData);
-        setList(parsedData);
-      });
+  useEffect(() => {
+    dispatch(requestAllProducts());
   }, []);
-
+console.log("Home:"+app.books);
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
 
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
@@ -103,8 +104,7 @@ const Home = ({ navigation }) => {
         <View style={styles.category}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableWithoutFeedback onPress={handleSelectedAll}>
-              <Text
-                style={[
+              <Text              style={[
                   styles.categoryItem,
                   {
                     color: activeAll ? colors.orange : 'black',
@@ -183,11 +183,11 @@ const Home = ({ navigation }) => {
           </ScrollView>
         </View>
         <View style={styles.flatlist}>
-          <FlatList data={contentList} renderItem={renderContent} numColumns={2} />
+          <FlatList data={app.books} renderItem={renderContent} numColumns={2} />
         </View>
       </View>
     </View>
   );
-};
+});
 
 export default Home;

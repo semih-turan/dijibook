@@ -7,7 +7,7 @@ const initialState = {
   username: '',
   password: '',
   userInfo: {},
-
+  books:[],
   loginStatus: false,
   loginLoading: false,
 };
@@ -25,7 +25,7 @@ const app = (state = initialState, { type, payload, key, value }) => {
       return { ...state, password: undefined, userInfo: null, loginStatus: false };
     }
     case constants.REQUEST_GET_ALL_PRODUCTS_WITH_FB: {
-      return { ...state, products: actionObj.payload.products };
+      return { ...state, books: payload };
     }
     case constants.REQUEST_GET_PRODUCTS_FB: {
       return { ...state, fbProducts: payload, };
