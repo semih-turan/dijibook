@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import styles from './DetailsCard.style';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const DetailsCard = ({ books }) => {
   return (
@@ -59,6 +60,18 @@ const DetailsCard = ({ books }) => {
                 <Text style={styles.subInfoTextFourth}>{books.language}</Text>
               </View>
             )}
+            <View style={styles.button_container}>
+              <View style={styles.addBook}>
+                <TouchableOpacity>
+                  <Text style={styles.addBookText}>Add Book</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.addFav}>
+                <TouchableOpacity>
+                  <Icon name="bookmark-plus" size={40} color="white" />
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
           <Text style={styles.title}>{books.title}</Text>
           <Text style={styles.text}>{books.text}</Text>

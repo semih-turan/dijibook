@@ -1,11 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React, { useState } from 'react';
-import { FlatList, View, ScrollView, TouchableWithoutFeedback, Text } from 'react-native';
+import { FlatList, View, ScrollView, TouchableWithoutFeedback, Text, TouchableOpacity } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
 import database from '@react-native-firebase/database';
 import parseContentData from '~/utils/contentData';
 import SearchBar from '~/components/SearchBar';
 import styles from './Search.style';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Search = ({navigation}) => {
   const [contentList, setContentList] = React.useState([]);
@@ -46,8 +47,13 @@ const Search = ({navigation}) => {
   };
   return (
     <View>
-      <View style={null}>
+      <View style={styles.searchbar}>
         <SearchBar onSearch={handleSearch} />
+        <View style={styles.barcode}>
+          <TouchableOpacity>
+            <Icon name="barcode" size={56} color="black" />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.container}>
         <FlatList data={list} renderItem={renderBooks} numColumns={2} />
@@ -57,5 +63,3 @@ const Search = ({navigation}) => {
 };
 
 export default Search;
-
-
