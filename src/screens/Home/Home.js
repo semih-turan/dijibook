@@ -33,7 +33,6 @@ const Home = connect(
   useEffect(() => {
     dispatch(requestAllProducts());
   }, []);
-console.log("Home:"+app.books);
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
 
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
