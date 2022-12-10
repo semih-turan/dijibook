@@ -12,9 +12,14 @@ export default StyleSheet.create({
     marginBottom: height * 0.15,
   },
   searchbar: {
-    backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+  },
+  barcode: {
+    width: width * 0.1,
+    marginLeft: width * 0.05,
+    height: width * 0.15,
   },
   category: {
     flexDirection: 'row',
