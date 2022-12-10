@@ -3,14 +3,13 @@ import { Text, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DCVBarcodeReader } from 'dynamsoft-capture-vision-react-native';
-
 import { connect } from 'react-redux';
 import { logoutUserWithFB } from '~/redux/actions/app';
 
 import Home from '~/screens/Home';
 import Deneme from '~/screens/AddBook';
 import Redux from '~/screens/Redux';
-import BarkodRead from '~/screens/BarkodRead';
+import BarcodeRead from '~/screens/BarcodeRead';
 import TabNavigation from '~/navigation/TabNavigation';
 import Details from '~/screens/Details';
 import { color } from 'react-native-reanimated';
@@ -67,6 +66,27 @@ const MainStack = connect(mapDispatchToProps)(props => {
           ),
         }}
         component={Details}
+      />
+      <Stack.Screen
+        name="BarcodeRead"
+        options={{
+          headerShown: true,
+          title: 'BarcodeRead',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: colors.white,
+          },
+          headerTitleStyle: {
+            color: colors.orange,
+            fontFamily: 'Montserrat-ExtraBold',
+            fontSize: text.H3 * 1.1,
+          },
+          headerTintColor: colors.orange,
+          headerRight: () => (
+            <Icon name="logout" color={'black'} size={28} onPress={() => dispatch(logoutUserWithFB())} />
+          ),
+        }}
+        component={BarcodeRead}
       />
     </Stack.Navigator>
   );
