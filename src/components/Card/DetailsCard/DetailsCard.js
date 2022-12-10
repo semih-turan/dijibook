@@ -62,12 +62,12 @@ const DetailsCard = ({ books }) => {
             )}
             <View style={styles.button_container}>
               <View style={styles.addBook}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={books.key}>
                   <Text style={styles.addBookText}>Add Book</Text>
                 </TouchableOpacity>
               </View>
               <View style={styles.addFav}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={books.key}>
                   <Icon name="bookmark-plus" size={40} color="white" />
                 </TouchableOpacity>
               </View>

@@ -16,8 +16,9 @@ const Home = connect(
   mapDispatchToProps,
 )(props => {
   const { dispatch, app, navigation } = props;
+  const a = JSON.stringify(app.books);
 
-  const [contentList, setContentList] = React.useState([]);
+  const [contentList, setContentList] = React.useState(a);
   const [list, setList] = React.useState('');
   const [activeAll, setActiveAll] = React.useState(true);
   const [activeRoman, setActiveRoman] = React.useState(false);
@@ -28,13 +29,14 @@ const Home = connect(
 
   const handleOnPress = book => {
     props.navigation.navigate('Details', book);
+    const a = JSON.stringify(book);
+    console.log("book:" + a);
   };
 
   useEffect(() => {
     dispatch(requestAllProducts());
   }, []);
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
-
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
   const handleSelectedAll = category => {
     const filtered = list;
@@ -182,7 +184,7 @@ const Home = connect(
           </ScrollView>
         </View>
         <View style={styles.flatlist}>
-          <FlatList data={app.books} renderItem={renderContent} numColumns={2} />
+          <FlatList data={contentList} renderItem={renderContent} numColumns={2} />
         </View>
       </View>
     </View>
