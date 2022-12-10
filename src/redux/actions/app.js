@@ -2,6 +2,8 @@ import * as constants from '~/redux/constants';
 
 import * as auth from '~/api/auth';
 import * as products from '~/api/products';
+import * as favorites from '~/api/favorities';
+
 import { showMessage, hideMessage } from "react-native-flash-message";
 
 
@@ -134,3 +136,76 @@ export const firebaseProductsListener = payload => async (dispatch, getState) =>
   } else {
   }
 };
+
+////Favorities Add
+
+export const requestAddFavoriteToFirebase =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+    const { data, success } = await favorites.addFavoriteToFirebase(
+      payload,
+      userInfo.user.uid,
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_ADD_FAVORITE_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
+
+export const requestRemoveFavoriteFromFirebase =
+  productId => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+    const { data, success } = await favorites.removeFavoriteFromFirebase(
+      userInfo.user.uid,
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_REMOVE_FAVORITE_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
+
+export const requestGetAllFavoritesFromFirebase =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+
+    const { data, success } = await favorites.getAllFavoritesFromFirebase(
+      userInfo.user.uid,
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_GET_FAVORITES_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
+
+export const firebaseFavoritesListener =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+
+    const { off, data, success } = await favorites.firebaseFavoritesListener(
+      userInfo.user.uid,
+      d => {
+        dispatch(requestGetAllFavoritesFromFirebase());
+      },
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.FIREBASE_FAVORITES_LISTENER,
+        payload: off,
+      });
+    } else {
+    }
+  };
+
