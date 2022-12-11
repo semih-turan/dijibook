@@ -1,5 +1,4 @@
-# react native Projesi
-## 149.React.Bootcamp Projesi
+# 149.React.Bootcamp Projesi
 ## Commit Atarken Dikkat Edilmesi Gerekenler:
 1. Ins: ekleyeceğin paketin ismi ayarlama yaptıysan config kelimesi paket isimleri arasında "-" işareti kullanılmalıdır. 
 2. Fix:a bug fix has occurred- Sayfada düzenleme yaptığın sayfa adı ve yapılan işlem örneğin: Fixed : Main ios style add
@@ -26,4 +25,5 @@ Style– style or formatting change
 
 Perf – improves code performance
 
+https://github.com/SAslan8006/dijibook adresinde başlanmıştır daha sonra burada devam edilmiştir.
 
