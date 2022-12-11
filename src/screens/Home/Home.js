@@ -16,8 +16,6 @@ const Home = connect(
   mapDispatchToProps,
 )(props => {
   const { dispatch, app, navigation } = props;
-  const a = JSON.stringify(app.books);
-
   const [contentList, setContentList] = React.useState(app.books);
   const [list, setList] = React.useState('');
   const [activeAll, setActiveAll] = React.useState(true);
@@ -26,7 +24,7 @@ const Home = connect(
   const [activeDeneme, setActiveDeneme] = React.useState(false);
   const [activeBiyografi, setActiveBiyografi] = React.useState(false);
   const [activeEdebiyat, setActiveEdebiyat] = React.useState(false);
-
+ 
   const handleOnPress = book => {
     props.navigation.navigate('Details', book);
   };

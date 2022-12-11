@@ -210,7 +210,6 @@ export const firebaseFavoritesListener =
 export const requestAddMyBookToFirebase = payload => async (dispatch, getState) => {
   const { userInfo } = getState().app;
   const { data, success } = await mybook.addMyBookToFirebase(payload, userInfo.user.uid);
-  console.log("Action: " + payload);
   if (success) {
     dispatch({
       type: constants.REQUEST_ADD_MYBOOK_FB,
