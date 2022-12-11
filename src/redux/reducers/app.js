@@ -36,7 +36,7 @@ const app = (state = initialState, { type, payload, key, value }) => {
     }
 
     case constants.REQUEST_GET_FAVORITES_FB: {
-      console.log('PAYLOAD', payload);
+      console.log('PAYLOAD: ', payload);
       return {
         ...state,
         fbFavorites: payload,

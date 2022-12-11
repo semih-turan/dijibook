@@ -4,7 +4,6 @@ export const addFavoriteToFirebase = async (item, uid) => {
     try {       
         const test=database().ref(`/user_favorites/${uid}`).push();
         await test.set(item);
-        console.log("Add Favorites:" + test);
         const val = { key: test.key };
         return { data: { val }, success: true };
     } catch (error) {
@@ -13,10 +12,10 @@ export const addFavoriteToFirebase = async (item, uid) => {
     return { data: null, success: false };
 };
 
-export const removeFavoriteFromFirebase = async uid => {
+export const removeFavoriteFromFirebase = async (uid,key,value) => {
     console.log('UİD =>', uid);
     try {
-        await database().ref(`/user_favorites/${uid}`).remove();
+        await database().ref(`/user_favorites/${uid}/${key}`).remove();
 
         return { data: {}, success: true };
     } catch (error) {
@@ -43,15 +42,19 @@ export const getAllFavoritesFromFirebase = async uid => {
         let keys = (
             await database().ref(`/user_favorites/${uid}`).once('value')
         ).val();
+
+        let bookKey = keys && Object.keys(keys);
+        let bookValue = keys && Object.values(keys);
+        
         if (keys !== null) {
             keys = Object.values(keys);
         } else {
         }
-
         const favorites = [];
 
         for (let i = 0; i < keys?.length; i++) {
-            favorites.push((await getFavoriteFromFirebase(keys[i])).data);
+            let data = (await getFavoriteFromFirebase(keys[i])).data;
+            favorites.push({ ...data, key: bookKey[i], value: bookValue[i] })
         }
 
         return { data: favorites, success: true };
@@ -70,9 +73,7 @@ export const firebaseFavoritesListener = async (uid, callBack) => {
     try {
         const ref = database().ref(`/user_favorites/${uid}`);
         ref.on('value', d => callBack(d.val()));
-
         global.firebaseFavoritesListenerOff = ref.off;
-        console.log("APi Favorite Listiner:" + data);
 
         return { data: null, success: true };
     } catch (error) {

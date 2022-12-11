@@ -16,7 +16,7 @@ const Home = connect(
   mapDispatchToProps,
 )(props => {
   const { dispatch, app, navigation } = props;
-  const [contentList, setContentList] = React.useState(app.books);
+  const [contentList, setContentList] = React.useState([]);
   const [list, setList] = React.useState('');
   const [activeAll, setActiveAll] = React.useState(true);
   const [activeRoman, setActiveRoman] = React.useState(false);
@@ -30,8 +30,9 @@ const Home = connect(
   };
  
   useEffect(() => { 
-    dispatch(requestAllProducts());   
-  }, []);
+    dispatch(requestAllProducts()); 
+    setContentList(app.books);  
+  }, [app.books]);
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
   const handleSelectedAll = category => {

@@ -15,13 +15,9 @@ const DetailsCard = connect(
   const { app, dispatch , books } = props; 
   
   const addFavorite = item => {
-    console.log("addFavorite:"+item);
-
     dispatch(requestAddFavoriteToFirebase(item));
   };
   const addMyBook = item => {
-    console.log("addMybook:" + item);
-
     dispatch(requestAddMyBookToFirebase(item));
   };
   return (

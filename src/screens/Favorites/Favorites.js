@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
 import styles from './Favorites.style';
 
@@ -8,6 +8,8 @@ import { showMessage } from "react-native-flash-message";
 import { connect } from 'react-redux';
 
 import { firebaseFavoritesListener, requestRemoveFavoriteFromFirebase} from '~/redux/actions/app';
+import BookCardDelete from '~/components/Card/BookCardDelete';
+import DeleteButton  from '~/components/DeleteButton/DeleteButton';
 
 const mapStateToProps = states => ({ app: states.app });
 const mapDispatchToProps = dispatch => ({ dispatch });
@@ -17,7 +19,6 @@ const Favorites = connect(
     mapDispatchToProps,
 )(props => {
     const { app, dispatch } = props;
-    console.log(app);
 
     useEffect(() => {
         dispatch(firebaseFavoritesListener());
@@ -37,30 +38,25 @@ const Favorites = connect(
 
         props.navigation.navigate('Home');
     };
+    // const a = JSON.stringify(app.fbFavorites);
+    // console.log("Favorites : " + a);
 
 
     const renderFavorites = ({ item }) => {
         return (
-          <View >
-            <BookCard book={item} onPress={null} />
-            <TouchableOpacity
-                onPress={() =>
-                    dispatch(requestRemoProductFromFirebase(item.key, item.value))
-                }>
-                <MaterialCommunityIcons
-                    name="delete-outline"
-                    style={styles.deleteIcon}
-                />
-                </TouchableOpacity>
-          </View>
+            <View style={styles.container}>
+                <BookCardDelete book={item} onPress={null} />
+                <DeleteButton handlePress={() => dispatch(requestRemoveFavoriteFromFirebase(item.key, item.value)) } />                
+            </View>
         );
     };
     return (
         <View>
+
             <FlatList
-                data={null}
+                data={app.fbFavorites}
                 renderItem={renderFavorites}
-                numColumns={3}
+                numColumns={2}
             />
         </View>
     );

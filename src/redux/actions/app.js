@@ -141,7 +141,6 @@ export const firebaseProductsListener = payload => async (dispatch, getState) =>
 export const requestAddFavoriteToFirebase = payload => async (dispatch, getState) => {
     const { userInfo } = getState().app;
     const { data, success } = await favorites.addFavoriteToFirebase(payload,userInfo.user.uid);
-    console.log("Action: "+payload);
     if (success) {
       dispatch({
         type: constants.REQUEST_ADD_FAVORITE_FB,
@@ -152,12 +151,9 @@ export const requestAddFavoriteToFirebase = payload => async (dispatch, getState
   };
 
 
-export const requestRemoveFavoriteFromFirebase =
-  productId => async (dispatch, getState) => {
+export const requestRemoveFavoriteFromFirebase = (key,value) => async (dispatch, getState) => {
     const { userInfo } = getState().app;
-    const { data, success } = await favorites.removeFavoriteFromFirebase(
-      userInfo.user.uid,
-    );
+    const { data, success } = await favorites.removeFavoriteFromFirebase(userInfo.user.uid,key, value  );
 
     if (success) {
       dispatch({
