@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React,{useEffect} from 'react';
 import { FlatList, View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import BookCard from '~/components/Card/BookCard';

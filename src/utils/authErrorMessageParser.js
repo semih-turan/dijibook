@@ -1,34 +1,34 @@
 export default function (errorCode) {
   switch (errorCode) {
     case 'auth/invalid-email':
-      return 'Geçersiz e-mail';
+      return 'Invalid e-mail';
     case 'auth/weak-password':
-      return 'Parola çok zayıf';
+      return 'Weak password';
     case 'auth/wrong-password':
-      return 'Parola geçersiz';
+      return 'Wrong password';
     case 'auth/email-already-exists':
-      return 'Sağlanan e-posta zaten mevcut bir kullanıcı tarafından kullanılıyor. Her kullanıcının benzersiz bir e-posta adresi olmalıdır.';
+      return 'The provided email is already in use by an existing user. Each user must have a unique email.';
     case 'auth/id-token-revoked':
-      return 'Firebase ID belirteci iptal edildi.';
+      return 'The Firebase ID token has been revoked.';
     case 'auth/internal-error':
-      return 'Kimlik doğrulama sunucusu, isteği işlemeye çalışırken beklenmeyen bir hatayla karşılaştı.';
+      return 'The Authentication server encountered an unexpected error while trying to process the request.';
     case 'auth/invalid-argument':
-      return 'Bir Kimlik Doğrulama yöntemine geçersiz bir bağımsız değişken sağlandı. Hata mesajı ek bilgiler içermelidir.';
+      return 'An invalid argument was provided to an Authentication method. The error message should contain additional information.';
     case 'auth/invalid-page-token':
-      return 'listUsers() içinde sağlanan sonraki sayfa belirteci geçersiz. Geçerli, boş olmayan bir dize olmalıdır.';
+      return 'The provided next page token in listUsers() is invalid. It must be a valid non-empty string.';
     case 'auth/invalid-password':
-      return 'password kullanıcı özelliği için sağlanan değer geçersiz. En az altı karakterden oluşan bir dize olmalıdır.';
+      return 'The provided value for the password user property is invalid. It must be a string with at least six characters.';
     case 'auth/invalid-user-import':
-      return 'İçe aktarılacak kullanıcı kaydı geçersiz.';
+      return 'The user record to import is invalid.';
     case 'auth/session-cookie-revoked':
-      return 'Firebase oturum çerezi iptal edildi.';
+      return 'The Firebase session cookie has been revoked.';
     case 'auth/uid-already-exists':
-      return 'Sağlanan uid zaten mevcut bir kullanıcı tarafından kullanılıyor. Her kullanıcının benzersiz bir uid olmalıdır.';
+      return 'The provided uid is already in use by an existing user. Each user must have a unique uid.';
     case 'auth/unauthorized-continue-uri':
-      return "Devam URL'sinin etki alanı beyaz listeye alınmadı. Firebase Konsolunda alanı beyaz listeye alın.";
+      return 'The domain of the continue URL is not whitelisted. Whitelist the domain in the Firebase Console.';
     case 'auth/user-not-found':
-      return 'Sağlanan tanımlayıcıya karşılık gelen mevcut bir kullanıcı kaydı yok';
+      return 'There is no existing user record corresponding to the provided identifier.';
     default:
-      return 'Beklenmeyen bir hata oluşmuştur.';
+      return 'An unexpected error occurs.';
   }
 }
