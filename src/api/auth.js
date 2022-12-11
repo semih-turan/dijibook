@@ -13,7 +13,7 @@ export const createUserWithFB = async (email, password) => {
   try {
     const response = await auth().createUserWithEmailAndPassword(email, password);
 
-    return { data: null, status: 200, success: true };
+    return { data: response, status: 200, success: true };
   } catch (error) {
     showMessage({ message: authErrorMessageParse(error.code), type: 'danger' });
     console.error(error);
@@ -29,7 +29,7 @@ export const loginUserWithFB = async (email, password) => {
   }
   try {
     const response = await auth().signInWithEmailAndPassword(email, password);
-    return { data: null, status: 200, success: true };
+    return { data: response, status: 200, success: true };
   } catch (error) {
     console.error(error);
     showMessage({ message: authErrorMessageParse(error.code), type: 'danger' });

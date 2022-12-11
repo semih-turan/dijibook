@@ -19,13 +19,13 @@ const Search = ({ navigation, route }) => {
         const parsedData = parseContentData(contentData || {});
         setContentList(parsedData);
         setList(parsedData);
-        handleSearch("9786055340629"); 
       });      
   }, []);
   // navigation alacak.
   const [list, setList] = useState(contentList); // useState içerisine firebase'den books gelecek.
   const handleOnPress = book => {
     navigation.navigate('Details', book);
+    console.log(book);
   };
   const renderBooks = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />; // handleOnPress item prop'unu alacak.
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
