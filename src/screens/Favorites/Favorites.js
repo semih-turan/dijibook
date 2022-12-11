@@ -1,3 +1,4 @@
+import React,{useEffect} from 'react';
 import { FlatList, View } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
 import styles from './Favorites.style';
@@ -7,7 +8,6 @@ import { showMessage } from "react-native-flash-message";
 import { connect } from 'react-redux';
 
 import { firebaseFavoritesListener, requestRemoveFavoriteFromFirebase} from '~/redux/actions/app';
-
 
 const mapStateToProps = states => ({ app: states.app });
 const mapDispatchToProps = dispatch => ({ dispatch });
@@ -20,7 +20,6 @@ const Favorites = connect(
 
     useEffect(() => {
         dispatch(firebaseFavoritesListener());
-
         return () => {
             if (global.firebaseProductsListenerOff) {
                 global.firebaseProductsListenerOff();

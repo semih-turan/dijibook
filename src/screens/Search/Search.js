@@ -19,19 +19,16 @@ const Search = ({ navigation, route }) => {
         const parsedData = parseContentData(contentData || {});
         setContentList(parsedData);
         setList(parsedData);
-       // if (!barcodeText) {
-       //   handleSearch(barcode_text);
-       // }
       });
   }, []);
   // navigation alacak.
   const [list, setList] = useState(contentList); // useState içerisine firebase'den books gelecek.
   const handleOnPress = book => {
     navigation.navigate('Details', book);
+    console.log(book);
   };
   const renderBooks = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />; // handleOnPress item prop'unu alacak.
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
-
   const handleSearch = text => {
     const filteredBook = contentList.filter(book => {
       const searchedText = text.toLowerCase();

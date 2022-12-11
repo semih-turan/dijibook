@@ -1,7 +1,7 @@
 export default function (data) {
   return Object.keys(data).map(key => {
     return {
-      key: key,
+      key:key,
       ...data[key],
     };
   });

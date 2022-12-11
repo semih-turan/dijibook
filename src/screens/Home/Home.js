@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React,{useEffect} from 'react';
 import { FlatList, View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
 import styles from './Home.style';
@@ -6,7 +6,6 @@ import Button from '~/components/Button';
 import { colors } from '~/themes';
 import { connect } from 'react-redux';
 import { requestAllProducts } from '~/redux/actions/app';
-import Loading from '~/components/Loading';
 
 const mapStateToProps = states => ({ app: states.app });
 const mapDispatchToProps = dispatch => ({ dispatch });
@@ -17,23 +16,22 @@ const Home = connect(
 )(props => {
   const { dispatch, app, navigation } = props;
   const [contentList, setContentList] = React.useState([]);
-  const [list, setList] = React.useState(contentList);
+  const [list, setList] = React.useState('');
   const [activeAll, setActiveAll] = React.useState(true);
   const [activeRoman, setActiveRoman] = React.useState(false);
   const [activeSiir, setActiveSiir] = React.useState(false);
   const [activeDeneme, setActiveDeneme] = React.useState(false);
   const [activeBiyografi, setActiveBiyografi] = React.useState(false);
   const [activeEdebiyat, setActiveEdebiyat] = React.useState(false);
-
+ 
   const handleOnPress = book => {
     props.navigation.navigate('Details', book);
   };
-
-  useEffect(() => {
+ 
+  useEffect(() => { 
     dispatch(requestAllProducts()); 
-    setContentList(app.books);
+    setContentList(app.books);  
   }, [app.books]);
-
   const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
   const handleSelectedAll = category => {
@@ -103,8 +101,7 @@ const Home = connect(
         <View style={styles.category}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableWithoutFeedback onPress={handleSelectedAll}>
-              <Text
-                style={[
+              <Text              style={[
                   styles.categoryItem,
                   {
                     color: activeAll ? colors.orange : 'black',
@@ -125,7 +122,7 @@ const Home = connect(
                     backgroundColor: activeRoman ? colors.white : 'white',
                   },
                 ]}>
-                Novel
+                Roman
               </Text>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={handleSelectedSiir}>
@@ -138,7 +135,7 @@ const Home = connect(
                     backgroundColor: activeSiir ? colors.white : 'white',
                   },
                 ]}>
-                Poem
+                Siir
               </Text>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={handleSelectedDeneme}>
@@ -151,7 +148,7 @@ const Home = connect(
                     backgroundColor: activeDeneme ? colors.white : 'white',
                   },
                 ]}>
-                Essay
+                Deneme
               </Text>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={handleSelectedBiyografi}>
@@ -164,7 +161,7 @@ const Home = connect(
                     backgroundColor: activeBiyografi ? colors.white : 'white',
                   },
                 ]}>
-                Biography
+                Biyografi
               </Text>
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={handleSelectedEdebiyatInceleme}>
@@ -177,7 +174,7 @@ const Home = connect(
                     backgroundColor: activeEdebiyat ? colors.white : 'white',
                   },
                 ]}>
-                Litreature Critique
+                Edebiyat Inceleme
               </Text>
             </TouchableWithoutFeedback>
           </ScrollView>

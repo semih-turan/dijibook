@@ -3,10 +3,14 @@ import * as constants from '~/redux/constants';
 import * as auth from '~/api/auth';
 import * as products from '~/api/products';
 import * as favorites from '~/api/favorities';
+import * as mybook from '~/api/mybook';
 
-import { showMessage, hideMessage } from 'react-native-flash-message';
+import { showMessage, hideMessage } from "react-native-flash-message";
+
+
 
 export const setApp = (key, value) => ({ type: constants.SET_APP, key, value });
+
 
 export const loginUserWithFB = payload => async (dispatch, getState) => {
   //async işlemlerin yapılacağı yer
@@ -21,9 +25,9 @@ export const loginUserWithFB = payload => async (dispatch, getState) => {
   if (success) {
     dispatch({
       type: constants.REQUEST_LOGIN_USER_WITH_FB,
-      payload: { userInfo: data },
+      payload: { userInfo: data },      
     });
-    showMessage({ message: 'Successfully logged in', type: 'success' });
+    showMessage({ message: "Başarılı bir şekilde giriş yapılmıştır", type: 'success' });
   } else {
   }
 };
@@ -43,12 +47,15 @@ export const createUserWithFB = payload => async (dispatch, getState) => {
       type: constants.REQUEST_CREATE_USER_WITH_FB,
       payload: { userInfo: data },
     });
-    showMessage({ message: 'User created successfully.', type: 'success' });
+    showMessage({ message: "Başarılı bir şekilde kullanıcı oluşturulmuştur", type: 'success' });
+
   } else {
   }
 };
 
+
 export const logoutUserWithFB = payload => async (dispatch, getState) => {
+
   dispatch({ type: constants.SET_APP, key: 'loginLoading', value: true });
 
   const { data, status, success } = await auth.logout();
@@ -60,7 +67,7 @@ export const logoutUserWithFB = payload => async (dispatch, getState) => {
       type: constants.REQUEST_LOGOUT_USER_WITH_FB,
       payload: {},
     });
-    showMessage({ message: 'Successfully logged out.', type: 'danger' });
+    showMessage({ message: "Başarılı bir şekilde oturum kapatılmıştır", type: 'danger' });
   } else {
   }
 };
@@ -70,7 +77,7 @@ export const requestAllProducts = payload => async dispatch => {
   if (success) {
     dispatch({
       type: constants.REQUEST_GET_ALL_PRODUCTS_WITH_FB,
-      payload: data,
+      payload: data ,
     });
   } else {
   }
@@ -78,7 +85,6 @@ export const requestAllProducts = payload => async dispatch => {
 
 export const requestAddProductToFirebase = payload => async (dispatch, getState) => {
   const { userInfo } = getState().app;
-
   const { data, success } = await products.addProductToFirebase(payload, userInfo.user.uid);
 
   if (success) {
@@ -133,57 +139,128 @@ export const firebaseProductsListener = payload => async (dispatch, getState) =>
 ////Favorities Add
 
 export const requestAddFavoriteToFirebase = payload => async (dispatch, getState) => {
-  const { userInfo } = getState().app;
-  const { data, success } = await favorites.addFavoriteToFirebase(payload, userInfo.user.uid);
+    const { userInfo } = getState().app;
+    const { data, success } = await favorites.addFavoriteToFirebase(payload,userInfo.user.uid);
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_ADD_FAVORITE_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
 
+
+export const requestRemoveFavoriteFromFirebase = (key,value) => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+    const { data, success } = await favorites.removeFavoriteFromFirebase(userInfo.user.uid,key, value  );
+
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_REMOVE_FAVORITE_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
+
+export const requestGetAllFavoritesFromFirebase =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+
+    const { data, success } = await favorites.getAllFavoritesFromFirebase(
+      userInfo.user.uid,
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_GET_FAVORITES_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
+
+export const firebaseFavoritesListener =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+
+    const { off, data, success } = await favorites.firebaseFavoritesListener(
+      userInfo.user.uid,
+      d => {
+        dispatch(requestGetAllFavoritesFromFirebase());
+      },
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.FIREBASE_FAVORITES_LISTENER,
+        payload: off,
+      });
+    } else {
+    }
+  };
+
+////MyBooks Add
+
+export const requestAddMyBookToFirebase = payload => async (dispatch, getState) => {
+  const { userInfo } = getState().app;
+  const { data, success } = await mybook.addMyBookToFirebase(payload, userInfo.user.uid);
   if (success) {
     dispatch({
-      type: constants.REQUEST_ADD_FAVORITE_FB,
+      type: constants.REQUEST_ADD_MYBOOK_FB,
       payload: data,
     });
   } else {
   }
 };
 
-export const requestRemoveFavoriteFromFirebase = productId => async (dispatch, getState) => {
+export const requestRemoveMyBookFromFirebase = (key, value) => async (dispatch, getState) => {
   const { userInfo } = getState().app;
-  const { data, success } = await favorites.removeFavoriteFromFirebase(userInfo.user.uid);
+  const { data, success } = await mybook.removeMyBookFromFirebase(userInfo.user.uid, key, value);
 
   if (success) {
     dispatch({
-      type: constants.REQUEST_REMOVE_FAVORITE_FB,
+      type: constants.REQUEST_REMOVE_MYBOOK_FB,
       payload: data,
     });
   } else {
   }
 };
 
-export const requestGetAllFavoritesFromFirebase = payload => async (dispatch, getState) => {
-  const { userInfo } = getState().app;
+export const requestGetAllMyBookFromFirebase =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
 
-  const { data, success } = await favorites.getAllFavoritesFromFirebase(userInfo.user.uid);
+    const { data, success } = await mybook.getAllMyBookFromFirebase(
+      userInfo.user.uid,
+    );
 
-  if (success) {
-    dispatch({
-      type: constants.REQUEST_GET_FAVORITES_FB,
-      payload: data,
-    });
-  } else {
-  }
-};
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_GET_MYBOOK_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
 
-export const firebaseFavoritesListener = payload => async (dispatch, getState) => {
-  const { userInfo } = getState().app;
+export const firebaseMyBookListener =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
 
-  const { off, data, success } = await favorites.firebaseFavoritesListener(userInfo.user.uid, d => {
-    dispatch(requestGetAllFavoritesFromFirebase());
-  });
+    const { off, data, success } = await mybook.firebaseMyBookListener(
+      userInfo.user.uid,
+      d => {
+        dispatch(requestGetAllMyBookFromFirebase());
+      },
+    );
 
-  if (success) {
-    dispatch({
-      type: constants.FIREBASE_FAVORITES_LISTENER,
-      payload: off,
-    });
-  } else {
-  }
-};
+    if (success) {
+      dispatch({
+        type: constants.FIREBASE_MYBOOK_LISTENER,
+        payload: off,
+      });
+    } else {
+    }
+  };

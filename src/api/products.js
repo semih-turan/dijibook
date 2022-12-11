@@ -7,7 +7,7 @@ export const getAllProducts = async() => {
     // const a = JSON.stringify(allBooks);
     // console.log("book:" + a);
     Object.keys(books).map(key => {
-      allBooks.push({...books[key],key});      
+      allBooks.push({...books[key],key:key});
     });    
 
     return { data: allBooks, success: true };
