@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Favorites from '~/screens/Favorites';
+import MyBook from '~/screens/MyBook';
 import Home from '~/screens/Home';
 import Search from '~/screens/Search';
 import colors from '~/themes/colors';

@@ -48,7 +48,19 @@ const app = (state = initialState, { type, payload, key, value }) => {
         ...state,
       };
     }
+    case constants.REQUEST_GET_MYBOOK_FB: {
+      console.log('PAYLOAD: ', payload);
+      return {
+        ...state,
+        MyBook: payload,
+      };
+    }
 
+    case constants.FIREBASE_MYBOOK_LISTENER: {
+      return {
+        ...state,
+      };
+    }
     default:
       return state;
   }
