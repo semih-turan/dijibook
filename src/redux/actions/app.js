@@ -3,6 +3,7 @@ import * as constants from '~/redux/constants';
 import * as auth from '~/api/auth';
 import * as products from '~/api/products';
 import * as favorites from '~/api/favorities';
+import * as mybook from '~/api/mybook';
 
 import { showMessage, hideMessage } from "react-native-flash-message";
 
@@ -84,7 +85,6 @@ export const requestAllProducts = payload => async dispatch => {
 
 export const requestAddProductToFirebase = payload => async (dispatch, getState) => {
   const { userInfo } = getState().app;
-
   const { data, success } = await products.addProductToFirebase(payload, userInfo.user.uid);
 
   if (success) {
@@ -138,14 +138,10 @@ export const firebaseProductsListener = payload => async (dispatch, getState) =>
 
 ////Favorities Add
 
-export const requestAddFavoriteToFirebase =
-  payload => async (dispatch, getState) => {
+export const requestAddFavoriteToFirebase = payload => async (dispatch, getState) => {
     const { userInfo } = getState().app;
-    const { data, success } = await favorites.addFavoriteToFirebase(
-      payload,
-      userInfo.user.uid,
-    );
-
+    const { data, success } = await favorites.addFavoriteToFirebase(payload,userInfo.user.uid);
+    console.log("Action: "+payload);
     if (success) {
       dispatch({
         type: constants.REQUEST_ADD_FAVORITE_FB,
@@ -154,6 +150,7 @@ export const requestAddFavoriteToFirebase =
     } else {
     }
   };
+
 
 export const requestRemoveFavoriteFromFirebase =
   productId => async (dispatch, getState) => {
@@ -208,3 +205,17 @@ export const firebaseFavoritesListener =
     }
   };
 
+////Favorities Add
+
+export const requestAddMyBookToFirebase = payload => async (dispatch, getState) => {
+  const { userInfo } = getState().app;
+  const { data, success } = await mybook.addMyBookToFirebase(payload, userInfo.user.uid);
+  console.log("Action: " + payload);
+  if (success) {
+    dispatch({
+      type: constants.REQUEST_ADD_MYBOOK_FB,
+      payload: data,
+    });
+  } else {
+  }
+};

@@ -2,19 +2,14 @@ import database from '@react-native-firebase/database';
 
 export const addFavoriteToFirebase = async (item, uid) => {
     try {       
-        //item id de itemin yükleme keyi olmalı yada item keyi gönderilmelidir
-
-        const favorite = database().ref(`/user_favorites/${uid}`).push();
-        console.log(favorite);
-        await favorite.set(item);
-
-        const val = { key: favorite.key };
-
+        const test=database().ref(`/user_favorites/${uid}`).push();
+        await test.set(item);
+        console.log("Add Favorites:" + test);
+        const val = { key: test.key };
         return { data: { val }, success: true };
     } catch (error) {
         console.error(error);
     }
-
     return { data: null, success: false };
 };
 
@@ -33,7 +28,7 @@ export const removeFavoriteFromFirebase = async uid => {
 
 export const getFavoriteFromFirebase = async key => {
     try {
-        const favoritesRef = database().ref('/favorites');
+        const favoritesRef = database().ref('/books');
         const item = (await favoritesRef.child(key).once('value')).val();
         return { data: item, success: true };
     } catch (error) {

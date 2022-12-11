@@ -4,7 +4,7 @@ import styles from './DetailsCard.style';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 
-import {  firebaseFavoritesListener,  requestAddFavoriteToFirebase} from '~/redux/actions/app';
+import { requestAddMyBookToFirebase,  requestAddFavoriteToFirebase} from '~/redux/actions/app';
 const mapStateToProps = states => ({ app: states.app });
 const mapDispatchToProps = dispatch => ({ dispatch });
 
@@ -16,11 +16,12 @@ const DetailsCard = connect(
   
   const addFavorite = item => {
     console.log("addFavorite:"+item);
-    // dispatch(requestAddFavoriteToFirebase(item));
+    dispatch(requestAddFavoriteToFirebase(item));
   };
   const addMyBook = item => {
-    console.log(item);
-    dispatch(requestAddFavoriteToFirebase(item));
+    console.log("addMybook:" + item);
+
+    dispatch(requestAddMyBookToFirebase(item));
   };
   return (
     <ScrollView style={styles.background}>

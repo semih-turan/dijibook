@@ -29,9 +29,8 @@ const Home = connect(
 
   const handleOnPress = book => {
     props.navigation.navigate('Details', book);
-    console.log("Home :"+book);  
   };
-
+ 
   useEffect(() => { 
     dispatch(requestAllProducts());   
   }, []);
