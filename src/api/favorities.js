@@ -72,6 +72,7 @@ export const firebaseFavoritesListener = async (uid, callBack) => {
         ref.on('value', d => callBack(d.val()));
 
         global.firebaseFavoritesListenerOff = ref.off;
+        console.log("APi Favorite Listiner:" + data);
 
         return { data: null, success: true };
     } catch (error) {

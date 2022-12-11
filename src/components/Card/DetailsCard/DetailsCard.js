@@ -16,6 +16,7 @@ const DetailsCard = connect(
   
   const addFavorite = item => {
     console.log("addFavorite:"+item);
+
     dispatch(requestAddFavoriteToFirebase(item));
   };
   const addMyBook = item => {
