@@ -82,7 +82,7 @@ export default StyleSheet.create({
     flex: 1,
     marginTop: height * 0.04,
   },
-  addBook: {
+  addMyBook: {
     height : height * 0.075,
     justifyContent: 'center',
     backgroundColor: colors.orange,
@@ -90,13 +90,22 @@ export default StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     width: width * 0.5,
-    marginLeft: width * 0.1,
   },
-  addBookText: {
+  addMyBookText: {
     color: 'white',
     fontFamily: 'Montserrat-ExtraBold',
     fontSize: text.H3,
     textAlign: 'center',
+  },
+  addBook: {
+    height: height * 0.075,
+    justifyContent: 'center',
+    backgroundColor: 'black',
+    borderRadius: 10,
+    borderWidth: 1,
+    marginLeft: width * 0.075,
+    width: width * 0.125,
+    alignItems: 'center',
   },
   addFav: {
     height : height * 0.075,
@@ -104,7 +113,7 @@ export default StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: 10,
     borderWidth: 1,
-    marginLeft: width * 0.1,
+    marginLeft: width * 0.075,
     width: width * 0.125,
     alignItems: 'center',
   },

@@ -1,8 +1,8 @@
 import database from '@react-native-firebase/database';
 
 export const addFavoriteToFirebase = async (item, uid) => {
-    try {
-        const test=database().ref(/user_favorites/${uid}).push();
+    try {       
+        const test=database().ref(`/user_favorites/${uid}`).push();
         await test.set(item);
         const val = { key: test.key };
         return { data: { val }, success: true };
@@ -15,7 +15,6 @@ export const addFavoriteToFirebase = async (item, uid) => {
 export const removeFavoriteFromFirebase = async (uid,key,value) => {
     console.log('UİD =>', uid);
     try {
-
         await database().ref(`/user_favorites/${uid}/${key}`).remove();
 
         return { data: {}, success: true };
@@ -41,12 +40,12 @@ export const getFavoriteFromFirebase = async key => {
 export const getAllFavoritesFromFirebase = async uid => {
     try {
         let keys = (
-            await database().ref(/user_favorites/${uid}).once('value')
+            await database().ref(`/user_favorites/${uid}`).once('value')
         ).val();
 
         let bookKey = keys && Object.keys(keys);
         let bookValue = keys && Object.values(keys);
-
+        
         if (keys !== null) {
             keys = Object.values(keys);
         } else {
@@ -65,13 +64,14 @@ export const getAllFavoritesFromFirebase = async uid => {
 
     return { data: null, success: false };
 };
+
 export const firebaseFavoritesListener = async (uid, callBack) => {
     if (global.firebaseFavoritesListenerOff) {
         global.firebaseFavoritesListenerOff();
     }
 
     try {
-        const ref = database().ref(/user_favorites/${uid});
+        const ref = database().ref(`/user_favorites/${uid}`);
         ref.on('value', d => callBack(d.val()));
         global.firebaseFavoritesListenerOff = ref.off;
 

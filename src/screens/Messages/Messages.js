@@ -38,7 +38,7 @@ const Messages = () => {
       text: content,
       username: userMail.split('@')[0],
       date: new Date().toISOString(),
-      dislike: 0,
+      like: 0,
     };
     console.log(contentObject);
     database().ref('messages/').push(contentObject);
@@ -46,7 +46,7 @@ const Messages = () => {
   const handleBegen = item => {
     database()
       .ref(`messages/${item.id}/`)
-      .update({ dislike: item.dislike + 1 });
+      .update({ like: item.like + 1 });
   };
 
   const renderContent = ({ item }) => (

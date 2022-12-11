@@ -1,11 +1,15 @@
 import { View } from 'react-native';
 import DetailsCard from '~/components/Card/DetailsCard';
+import { Navigation } from '~/navigation';
 
-const Details = ({ route }) => {
+const Details = ({ route, navigation }) => {
   const book = route.params;
+  const handleOnPress = () => {
+    navigation.navigate('AddBook');
+  };
   return (
     <View>
-      <DetailsCard books={book} />
+      <DetailsCard books={book} onPress={handleOnPress} />
     </View>
   );
 };

@@ -51,7 +51,7 @@ const Search = ({ navigation, route }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container} >
       <View style={styles.searchbar}>
         <SearchBar onSearch={handleSearch} />
         <View style={styles.barcode}>
@@ -60,7 +60,7 @@ const Search = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.container}>
+      <View style={styles.flatlist}>
         <FlatList data={list} renderItem={renderBooks} numColumns={2} />
       </View>
     </View>

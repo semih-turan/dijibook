@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     margin: 10,
     padding: 10,
-    backgroundColor: colors.orange,
+    backgroundColor: colors.gray,
     borderRadius: 15,
   },
   inner_container: {
@@ -12,12 +12,13 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
   },
   user: {
-    color: 'black',
-    fontStyle: 'italic',
+    color: colors.orange,
     fontSize: 15,
+    fontStyle: 'bold',
   },
   date: {
-    color: 'black',
+    color: colors.orange,
+    fontStyle: 'bold',
   },
   title: {
     padding: 10,
@@ -28,27 +29,27 @@ export default StyleSheet.create({
   footer: {
     alignItems: 'flex-end',
   },
-  dislike_container: {
+  like_container: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-end',
-    backgroundColor: colors.white,
+    backgroundColor: colors.orange,
     paddingHorizontal: 10,
     borderRadius: 20,
   },
-  dislike_count_container: {
-    backgroundColor: colors.white,
+  like_count_container: {
+    backgroundColor: colors.orange,
     borderRadius: 20,
     margin: 3,
     padding: 6,
   },
-  dislike_count_text: {
+  like_count_text: {
     textAlign: 'center',
     color: 'black',
     fontWeight: 'bold',
     fontSize: 15,
   },
-  dislike_text: {
+  like_text: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 18,

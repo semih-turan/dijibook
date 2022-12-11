@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
+import colors from '~/configs/color';
 
 const height = Dimensions.get('window').height;
 
@@ -9,11 +10,12 @@ export default StyleSheet.create({
         width: width * 0.42,
         height: height * 0.35,
         marginVertical: height * 0.025,
-        marginHorizontal: width * 0.025,
+        marginHorizontal: width * 0.04,
         justifyContent: 'flex-end',
         alignItems: 'center',
         borderRadius: 8,
         borderWidth: 0.5,
         borderColor: 'gray',
+        backgroundColor: colors.yellow,
     },
 });
