@@ -9,8 +9,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Search = ({ navigation, route }) => {
   const [contentList, setContentList] = React.useState([]);
-
   const barcodeText = route.params?.barcode_text;
+
   React.useEffect(() => {
     database()
       .ref('/books')
@@ -19,9 +19,9 @@ const Search = ({ navigation, route }) => {
         const parsedData = parseContentData(contentData || {});
         setContentList(parsedData);
         setList(parsedData);
-        if (barcodeText != undefined) {
-          handleSearch(barcodeText);
-        }
+       // if (!barcodeText) {
+       //   handleSearch(barcode_text);
+       // }
       });
   }, []);
   // navigation alacak.
@@ -31,7 +31,7 @@ const Search = ({ navigation, route }) => {
   };
   const renderBooks = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />; // handleOnPress item prop'unu alacak.
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
-  
+
   const handleSearch = text => {
     const filteredBook = contentList.filter(book => {
       const searchedText = text.toLowerCase();
