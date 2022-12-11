@@ -141,7 +141,6 @@ export const firebaseProductsListener = payload => async (dispatch, getState) =>
 export const requestAddFavoriteToFirebase = payload => async (dispatch, getState) => {
     const { userInfo } = getState().app;
     const { data, success } = await favorites.addFavoriteToFirebase(payload,userInfo.user.uid);
-    console.log("Action: "+payload);
     if (success) {
       dispatch({
         type: constants.REQUEST_ADD_FAVORITE_FB,
@@ -152,12 +151,9 @@ export const requestAddFavoriteToFirebase = payload => async (dispatch, getState
   };
 
 
-export const requestRemoveFavoriteFromFirebase =
-  productId => async (dispatch, getState) => {
+export const requestRemoveFavoriteFromFirebase = (key,value) => async (dispatch, getState) => {
     const { userInfo } = getState().app;
-    const { data, success } = await favorites.removeFavoriteFromFirebase(
-      userInfo.user.uid,
-    );
+    const { data, success } = await favorites.removeFavoriteFromFirebase(userInfo.user.uid,key, value  );
 
     if (success) {
       dispatch({
@@ -205,7 +201,7 @@ export const firebaseFavoritesListener =
     }
   };
 
-////Favorities Add
+////MyBooks Add
 
 export const requestAddMyBookToFirebase = payload => async (dispatch, getState) => {
   const { userInfo } = getState().app;
@@ -218,3 +214,53 @@ export const requestAddMyBookToFirebase = payload => async (dispatch, getState) 
   } else {
   }
 };
+
+export const requestRemoveMyBookFromFirebase = (key, value) => async (dispatch, getState) => {
+  const { userInfo } = getState().app;
+  const { data, success } = await mybook.removeMyBookFromFirebase(userInfo.user.uid, key, value);
+
+  if (success) {
+    dispatch({
+      type: constants.REQUEST_REMOVE_MYBOOK_FB,
+      payload: data,
+    });
+  } else {
+  }
+};
+
+export const requestGetAllMyBookFromFirebase =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+
+    const { data, success } = await mybook.getAllMyBookFromFirebase(
+      userInfo.user.uid,
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.REQUEST_GET_MYBOOK_FB,
+        payload: data,
+      });
+    } else {
+    }
+  };
+
+export const firebaseMyBookListener =
+  payload => async (dispatch, getState) => {
+    const { userInfo } = getState().app;
+
+    const { off, data, success } = await mybook.firebaseMyBookListener(
+      userInfo.user.uid,
+      d => {
+        dispatch(requestGetAllMyBookFromFirebase());
+      },
+    );
+
+    if (success) {
+      dispatch({
+        type: constants.FIREBASE_MYBOOK_LISTENER,
+        payload: off,
+      });
+    } else {
+    }
+  };

@@ -7,8 +7,9 @@ import {
   EnumDBRPresetTemplate,
   EnumTorchState,
 } from 'dynamsoft-capture-vision-react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Entypo from 'react-native-vector-icons/MaterialCommunityIcons';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import styles from './BarcodeRead.style';
 
 const option = {
   mediaType: 'photo',
@@ -33,6 +34,7 @@ const modalInitState = {
   isVisible: false,
   modalText: '',
 };
+
 class BarcodeRead extends React.Component {
   ifDecodingFile = false;
   state = {
@@ -123,7 +125,7 @@ class BarcodeRead extends React.Component {
           />
           <Entypo
             style={{ paddingLeft: 15 }}
-            name={'folder-images'}
+            name={'folder'}
             size={35}
             onPress={() => {
               this.useImagePicker(launchImageLibrary);
@@ -143,15 +145,14 @@ class BarcodeRead extends React.Component {
 
   render() {
     const { navigation } = this.props;
-
     let barcode_text = '';
-    // let region = {
-    //   regionTop: 30,
-    //   regionLeft: 15,
-    //   regionBottom: 70,
-    //   regionRight: 85,
-    //   regionMeasuredByPercentage: true,
-    // };       // Define the scan region.
+    let region = {
+      regionTop: 30,
+      regionLeft: 15,
+      regionBottom: 70,
+      regionRight: 85,
+      regionMeasuredByPercentage: true,
+    }; // Define the scan region.
     let results = this.state.results;
     if (results && results.length > 0) {
       for (var i = 0; i < results.length; i++) {
@@ -159,13 +160,12 @@ class BarcodeRead extends React.Component {
       }
     }
     if (barcode_text.length > 0) {
+      console.log(barcode_text);
       navigation.navigate('Search', { barcode_text: barcode_text });
     }
     return (
       <DCVCameraView
-        style={{
-          flex: 1,
-        }}
+        style={{ flex: 1 }}
         ref={ref => {
           this.scanner = ref;
         }}
@@ -174,8 +174,8 @@ class BarcodeRead extends React.Component {
           visible: true,
         }}
         torchState={EnumTorchState.OFF}
-        // scanRegionVisible={true}
-        // scanRegion={region}  // Set scan region.
+        scanRegionVisible={true}
+        scanRegion={region} // Set scan region.
       >
         <Text
           style={{
@@ -209,37 +209,5 @@ class BarcodeRead extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    backgroundColor: '#00000000',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
-    textAlign: 'center',
-  },
-  headerRight: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-});
 
 export default BarcodeRead;

@@ -10,6 +10,7 @@ import Home from '~/screens/Home';
 import Search from '~/screens/Search';
 import colors from '~/themes/colors';
 import ReduxDeneme from '~/screens/Redux';
+import Messages from '~/screens/Messages';
 
 const Tabs = createBottomTabNavigator();
 
@@ -26,6 +27,8 @@ const TabNavigation = () => {
     ) : (
       <Icon name="bookmark-minus-outline" size={24} color="black" />
     );
+  const chatIcon = ({ focused, color, size }) =>
+    focused ? <Icon name="chat" size={24} color="black" /> : <Icon name="chat-outline" size={24} color="black" />;
 
   return (
     <Tabs.Navigator
@@ -38,7 +41,9 @@ const TabNavigation = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: homeIcon, tabBarActiveTintColor: colors.orange, tabBarInactiveTintColor: colors.black,
+          tabBarIcon: homeIcon,
+          tabBarActiveTintColor: colors.orange,
+          tabBarInactiveTintColor: colors.black,
           header: () => (
             <View style={styles.container}>
               <Text style={styles.text}>Home</Text>
@@ -50,7 +55,9 @@ const TabNavigation = () => {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: searchIcon, tabBarActiveTintColor: colors.orange, tabBarInactiveTintColor: colors.black,
+          tabBarIcon: searchIcon,
+          tabBarActiveTintColor: colors.orange,
+          tabBarInactiveTintColor: colors.black,
           header: () => (
             <View style={styles.container}>
               <Text style={styles.text}>Search</Text>
@@ -68,6 +75,20 @@ const TabNavigation = () => {
           header: () => (
             <View style={styles.container}>
               <Text style={styles.text}>Favorites</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Chat"
+        component={Messages}
+        options={{
+          tabBarIcon: chatIcon,
+          tabBarActiveTintColor: colors.orange,
+          tabBarInactiveTintColor: colors.black,
+          header: () => (
+            <View style={styles.container}>
+              <Text style={styles.text}>Chat</Text>
             </View>
           ),
         }}

@@ -17,7 +17,6 @@ const Favorites = connect(
     mapDispatchToProps,
 )(props => {
     const { app, dispatch } = props;
-    console.log(app);
 
     useEffect(() => {
         dispatch(firebaseFavoritesListener());
