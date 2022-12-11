@@ -1,27 +1,26 @@
 import React,{useEffect} from 'react';
 import { FlatList, View, TouchableOpacity } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
-import styles from './Favorites.style';
+import styles from './MyBook.style';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { showMessage } from "react-native-flash-message";
 import { connect } from 'react-redux';
 
-import { firebaseFavoritesListener, requestRemoveFavoriteFromFirebase} from '~/redux/actions/app';
+import { firebaseMyBookListener, requestRemoveMyBookFromFirebase} from '~/redux/actions/app';
 import BookCardDelete from '~/components/Card/BookCardDelete';
 import DeleteButton  from '~/components/DeleteButton/DeleteButton';
 
 const mapStateToProps = states => ({ app: states.app });
 const mapDispatchToProps = dispatch => ({ dispatch });
 
-const Favorites = connect(
+const MyBook = connect(
     mapStateToProps,
     mapDispatchToProps,
 )(props => {
     const { app, dispatch } = props;
 
     useEffect(() => {
-        dispatch(firebaseFavoritesListener());
+        dispatch(firebaseMyBookListener());
         return () => {
             if (global.firebaseProductsListenerOff) {
                 global.firebaseProductsListenerOff();
@@ -42,11 +41,11 @@ const Favorites = connect(
     // console.log("Favorites : " + a);
 
 
-    const renderFavorites = ({ item }) => {
+    const renderMyBook = ({ item }) => {
         return (
             <View style={styles.container}>
                 <BookCardDelete book={item} onPress={null} />
-                <DeleteButton handlePress={() => dispatch(requestRemoveFavoriteFromFirebase(item.key, item.value)) } />                
+                <DeleteButton handlePress={() => dispatch(requestRemoveMyBookFromFirebase(item.key, item.value)) } />                
             </View>
         );
     };
@@ -54,12 +53,12 @@ const Favorites = connect(
         <View>
 
             <FlatList
-                data={app.fbFavorites}
-                renderItem={renderFavorites}
+                data={app.MyBook}
+                renderItem={renderMyBook}
                 numColumns={2}
             />
         </View>
     );
 });
 
-export default Favorites;
+export default MyBook;

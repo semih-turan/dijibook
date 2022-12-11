@@ -15,7 +15,8 @@ export const addFavoriteToFirebase = async (item, uid) => {
 export const removeFavoriteFromFirebase = async (uid,key,value) => {
     console.log('UİD =>', uid);
     try {
-        await database().ref(/user_favorites/${uid}/${key}).remove();
+
+        await database().ref(`/user_favorites/${uid}/${key}`).remove();
 
         return { data: {}, success: true };
     } catch (error) {
