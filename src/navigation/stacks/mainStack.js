@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { logoutUserWithFB } from '~/redux/actions/app';
 
 import Home from '~/screens/Home';
-import Deneme from '~/screens/AddBook';
+import AddBook from '~/screens/AddBook';
 import Redux from '~/screens/Redux';
 import BarcodeRead from '~/screens/BarcodeRead';
 import TabNavigation from '~/navigation/TabNavigation';
@@ -87,6 +87,27 @@ const MainStack = connect(mapDispatchToProps)(props => {
           ),
         }}
         component={BarcodeRead}
+      />
+      <Stack.Screen
+        name="AddBook"
+        options={{
+          headerShown: true,
+          title: 'AddBook',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: colors.white,
+          },
+          headerTitleStyle: {
+            color: colors.orange,
+            fontFamily: 'Montserrat-ExtraBold',
+            fontSize: text.H3 * 1.1,
+          },
+          headerTintColor: colors.orange,
+          headerRight: () => (
+            <Icon name="logout" color={'black'} size={28} onPress={() => dispatch(logoutUserWithFB())} />
+          ),
+        }}
+        component={AddBook}
       />
     </Stack.Navigator>
   );

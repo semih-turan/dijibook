@@ -7,6 +7,9 @@ const height = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   container: {
+    backgroundColor: '#FBF5F4',
+  },
+  flatlist: {
     marginHorizontal: width * 0.05,
     marginVertical: height * 0.01,
     marginBottom: height * 0.15,

@@ -3,7 +3,7 @@ import {TouchableOpacity} from 'react-native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import styles from './styles';
+import styles from './DeleteButton.style';
 
 const DeleteButton = ({handlePress}) => {
   return (

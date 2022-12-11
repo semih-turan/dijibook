@@ -31,4 +31,9 @@ export default StyleSheet.create({
     borderColor: colors.black,
   },
   flatlist: {},
+  active: {
+    color: colors.orange,
+    borderColor: colors.orange,
+    backgroundColor: colors.white,
+  },
 });
