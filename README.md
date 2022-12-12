@@ -1,7 +1,48 @@
-# 149.React.Bootcamp Projesi
-## Commit Atarken Dikkat Edilmesi Gerekenler:
-1. Ins: ekleyeceğin paketin ismi ayarlama yaptıysan config kelimesi paket isimleri arasında "-" işareti kullanılmalıdır. 
-2. Fix:a bug fix has occurred- Sayfada düzenleme yaptığın sayfa adı ve yapılan işlem örneğin: Fixed : Main ios style add
+## 149.React.Bootcamp Project - DIJIBOOK
+
+## How to Use
+`git clone https://github.com/semih-turan/dijibook.git`
+
+`cd dijibook`
+
+`npm install` 
+
+**To Start Metro Server,**
+
+`npm start run` 
+
+**For android:** 
+
+`npm run android`
+
+**For ios:**
+
+`cd dijibook`
+
+`bundle install`
+
+`cd dijibook/ios`
+
+`pod install`
+
+`cd ..`
+
+`npm run ios`
+
+
+
+### ScreenRecording
+
+
+https://user-images.githubusercontent.com/103884968/207007900-bc65bffc-f61c-436f-bb60-dd5d667dcdd0.mov
+
+
+### Project Note: 
+> This project was started at https://github.com/SAslan8006/dijibook and continued here.
+## Commit Rules:
+
+1. Ins: If you have set the name of the package you will add, the word config should be used between the package names and the "-" sign should be used.
+2. Fix:a bug fix has occurred- The name of the page you edited on the page and the action taken, for example: Fixed : Main ios style add
 
 feat – a new feature is introduced with the changes
 
@@ -24,6 +65,3 @@ revert – reverts a previous commit
 Style– style or formatting change 
 
 Perf – improves code performance
-
-https://github.com/SAslan8006/dijibook adresinde başlanmıştır daha sonra burada devam edilmiştir.
-
