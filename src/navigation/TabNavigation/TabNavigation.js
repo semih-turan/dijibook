@@ -31,6 +31,13 @@ const TabNavigation = () => {
   const chatIcon = ({ focused, color, size }) =>
     focused ? <Icon name="chat" size={24} color="black" /> : <Icon name="chat-outline" size={24} color="black" />;
 
+  const myBookIcon = ({ focused, color, size }) =>
+    focused ? (
+      <Icon name="book-open" size={24} color="black" />
+    ) : (
+      <Icon name="book-open-outline" size={24} color="black" />
+    );
+
   return (
     <Tabs.Navigator
       screenOptions={{
@@ -62,6 +69,20 @@ const TabNavigation = () => {
           header: () => (
             <View style={styles.container}>
               <Text style={styles.text}>Search</Text>
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="MyBook"
+        component={MyBook}
+        options={{
+          tabBarIcon: myBookIcon,
+          tabBarActiveTintColor: colors.orange,
+          tabBarInactiveTintColor: colors.black,
+          header: () => (
+            <View style={styles.container}>
+              <Text style={styles.text}>My Book</Text>
             </View>
           ),
         }}

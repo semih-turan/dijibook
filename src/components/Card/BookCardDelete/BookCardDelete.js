@@ -4,7 +4,7 @@ import styles from './BookCardDelete.style';
 const BookCard = ({ book, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View >
+      <View style={styles.container}>
         <Image style={styles.image} source={{ uri: book.image }} />
         <Text ellipsizeMode="tail" numberOfLines={3} style={styles.bookName}>
           {book.bookName}

@@ -45,7 +45,7 @@ export const getAllFavoritesFromFirebase = async uid => {
 
         let bookKey = keys && Object.keys(keys);
         let bookValue = keys && Object.values(keys);
-
+        
         if (keys !== null) {
             keys = Object.values(keys);
         } else {
