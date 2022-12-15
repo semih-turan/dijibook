@@ -46,25 +46,11 @@ https://user-images.githubusercontent.com/103884968/207007900-bc65bffc-f61c-436f
 
 1. Ins: If you have set the name of the package you will add, the word config should be used between the package names and the "-" sign should be used.
 2. Fix:a bug fix has occurred- The name of the page you edited on the page and the action taken, for example: Fixed : Main ios style add
-
-feat – a new feature is introduced with the changes
-
-chore – changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
-
-refactor – refactored code that neither fixes a bug nor adds a feature
-
-docs – updates to documentation such as a the README or other markdown files
-
-style – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
-
-test – including new or correcting previous tests
-
-ci – continuous integration related
-
-build – changes that affect the build system or external dependencies
-
-revert – reverts a previous commit
-
-Style– style or formatting change 
-
-Perf – improves code performance
+3. Style – changes that do not affect the meaning of the code, likely related to code formatting such as white-space, missing semi-colons, and so on.
+4. Feat – a new feature is introduced with the changes
+5. Chore – changes that do not relate to a fix or feature and don't modify src or test files (for example updating dependencies)
+6. Refactor – refactored code that neither fixes a bug nor adds a feature
+7. Docs – updates to documentation such as a the README or other markdown files
+8. Build – changes that affect the build system or external dependencies
+9. Revert – reverts a previous commit
+10. Rerf – improves code performance
