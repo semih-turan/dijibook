@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "813308504886",
-    "project_id": "dijibook-31b27",
-    "storage_bucket": "dijibook-31b27.appspot.com"
+    "project_number": "517759369215",
+    "project_id": "e-library-ef4c3",
+    "storage_bucket": "e-library-ef4c3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:813308504886:android:026581549e5a8882066197",
+        "mobilesdk_app_id": "1:517759369215:android:584bc13dbbdb30e415b1ca",
         "android_client_info": {
           "package_name": "com.dijibook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "813308504886-i8sickg01ldo350cu8ueevjqjt92ur0u.apps.googleusercontent.com",
+          "client_id": "517759369215-vjos794efh4k2arad76ril9buesm3cic.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCrE7LayGp-6ffGnSkfGtYurCvXaSy-HK8"
+          "current_key": "AIzaSyAap1c3T3zYY29jXQb5IRrp3NuDfSfW6Rw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "813308504886-i8sickg01ldo350cu8ueevjqjt92ur0u.apps.googleusercontent.com",
+              "client_id": "517759369215-vjos794efh4k2arad76ril9buesm3cic.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "517759369215-0eh414ngtbbpkgj64ijqdut55a5b9mnb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dijibook"
+              }
             }
           ]
         }
