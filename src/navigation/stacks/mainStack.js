@@ -9,7 +9,9 @@ import { logoutUserWithFB } from '~/redux/actions/app';
 import Home from '~/screens/Home';
 import AddBook from '~/screens/AddBook';
 import Redux from '~/screens/Redux';
-import BarcodeRead from '~/screens/BarcodeRead';
+import Barcoded from '~/screens/BarcodeRead';
+import BarcodeRead from '~/screens/Barcode';
+
 import TabNavigation from '~/navigation/TabNavigation';
 import Details from '~/screens/Details';
 import { color } from 'react-native-reanimated';
