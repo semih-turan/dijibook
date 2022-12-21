@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 
 import { connect } from 'react-redux';
+import { AppOpenAd, InterstitialAd, RewardedAd, BannerAd, TestIds, BannerAdSize, AdEventType, RewardedAdEventType } from 'react-native-google-mobile-ads';
 
 import { createUserWithFB, loginUserWithFB, setApp } from '~/redux/actions/app';
 import styles from './styles';
@@ -11,6 +12,11 @@ import Button from '~/components/Button';
 const mapStateToProps = states => ({ app: states.app });
 
 const mapDispatchToProps = dispatch => ({ dispatch });
+const adUnitId = 'ca-app-pub-2522309004729258/1628419660';
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  // keywords: ['fashion', 'clothing'],
+});
 
 const Login = connect(
   mapStateToProps,
@@ -42,6 +48,16 @@ const Login = connect(
 
       {/* Loaading logo if user wait due to internet connection issue */}
       {app.loginLoading}
+
+      <BannerAd
+        size={BannerAdSize.BANNER}
+        unitId={TestIds.BANNER}
+        //Yeni ayarlar eklenmelidir
+      // unitId={"ca-app-pub-2522309004729258/1628419660"}
+      // requestOptions={{
+      //   requestNonPersonalizedAdsOnly:true,
+      // }}
+      />
     </View>
   );
 });

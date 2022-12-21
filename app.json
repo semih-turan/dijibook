@@ -1,4 +1,8 @@
 {
   "name": "dijibook",
-  "displayName": "dijibook"
+  "displayName": "dijibook",
+  "react-native-google-mobile-ads":{
+    "android_app_id":"ca-app-pub-2522309004729258~1607803599",
+    "ios_app_id":"ca-app-pub-2522309004729258~1607803599"
+  }
 }

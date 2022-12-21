@@ -9,7 +9,6 @@ import { logoutUserWithFB } from '~/redux/actions/app';
 import Home from '~/screens/Home';
 import AddBook from '~/screens/AddBook';
 import Redux from '~/screens/Redux';
-import Barcoded from '~/screens/BarcodeRead';
 import BarcodeRead from '~/screens/Barcode';
 
 import TabNavigation from '~/navigation/TabNavigation';
@@ -19,15 +18,6 @@ import { colors } from '~/themes';
 import { text } from '~/configs';
 import { Navigation } from '..';
 
-(async () => {
-  try {
-    await DCVBarcodeReader.initLicense(
-      'DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAxNTEyNTI2LVRYbE5iMkpwYkdWUWNtOXFYMlJpY2ciLCJvcmdhbml6YXRpb25JRCI6IjEwMTUxMjUyNiIsImNoZWNrQ29kZSI6MTAxMTE2NjY1MX0=',
-    );
-  } catch (e) {
-    console.log(e);
-  }
-})();
 
 const mapDispatchToProps = dispatch => ({ dispatch });
 

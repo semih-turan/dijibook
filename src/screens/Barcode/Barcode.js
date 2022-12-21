@@ -1,12 +1,27 @@
 import * as React from 'react';
 
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useCameraDevices } from 'react-native-vision-camera';
 import { Camera } from 'react-native-vision-camera';
 import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
 
-export default function App() {
+import { connect } from 'react-redux';
+import { requestAllProducts } from '~/redux/actions/app';
+
+
+const mapStateToProps = states => ({ app: states.app });
+const mapDispatchToProps = dispatch => ({ dispatch });
+
+const App = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(props => {
+    const { dispatch, app, navigation } = props;
+    const [contentList, setContentList] = React.useState([]);
+    const [activeNames, setActiveNames] = React.useState('');
     const [hasPermission, setHasPermission] = React.useState(false);
+    const [takePhotoButtonPressed, setTakePhotoButtonPressed] = React.useState(false);
+
     const devices = useCameraDevices();
     const device = devices.back;
 
@@ -14,27 +29,24 @@ export default function App() {
         checkInverted: true,
     });
 
-    // Alternatively you can use the underlying function:
-    //
-    // const frameProcessor = useFrameProcessor((frame) => {
-    //   'worklet';
-    //   const detectedBarcodes = scanBarcodes(frame, [BarcodeFormat.QR_CODE], { checkInverted: true });
-    //   runOnJS(setBarcodes)(detectedBarcodes);
-    // }, []);
-
     React.useEffect(() => {
+        dispatch(requestAllProducts());
         (async () => {
             const status = await Camera.requestCameraPermission();
             setHasPermission(status === 'authorized');
         })();
     }, []);
 
-    const barcode_text=barcodes.map((barcode)=>(barcode.displayValue));
+    const barcode_text = barcodes.map((barcode) => (barcode.displayValue));
     console.log(barcode_text);
-    if (barcode_text.length > 5) {
-        console.log(barcode_text);
-        navigation.navigate('Search', { barcode_text: barcode_text });
-    }
+
+    const handleSelectedBook = barcode_text => {
+        setContentList(app.books?.filter(books => books.isbn.includes(barcode_text)));
+        console.log(app.books?.filter(barcode_text));
+        console.log("Book:"+books);
+        // navigation.navigate('Details', { books});
+    };
+
     return (
         device != null &&
         hasPermission && (
@@ -51,10 +63,17 @@ export default function App() {
                         {barcode.displayValue}
                     </Text>
                 ))}
+                <TouchableOpacity
+                    onPressIn={() => setTakePhotoButtonPressed(true)}
+                    onPressOut={() => setTakePhotoButtonPressed(false)}
+                    onPress={handleSelectedBook}
+                    style={takePhotoButtonPressed ? styles.takePhotoButtonPressed : styles.takePhotoButton}
+                />
             </>
         )
     );
-}
+});
+export default App;
 
 const styles = StyleSheet.create({
     barcodeTextURL: {
@@ -62,5 +81,23 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         backgroundColor: 'red',
+    }, takePhotoButton: {
+        borderWidth: 3,
+        borderRadius: 999,
+        width: '14%',
+        aspectRatio: 1,
+        borderColor: '#fff',
+        alignSelf: 'center',
+        backgroundColor: '#00000044',
+        margin: 16,
+    },
+    takePhotoButtonPressed: {
+        borderWidth: 0,
+        borderRadius: 999,
+        width: '14%',
+        aspectRatio: 1,
+        alignSelf: 'center',
+        backgroundColor: '#fff',
+        margin: 16,
     },
 });
