@@ -29,6 +29,12 @@ export default function App() {
         })();
     }, []);
 
+    const barcode_text=barcodes.map((barcode)=>(barcode.displayValue));
+    console.log(barcode_text);
+    if (barcode_text.length > 5) {
+        console.log(barcode_text);
+        navigation.navigate('Search', { barcode_text: barcode_text });
+    }
     return (
         device != null &&
         hasPermission && (
