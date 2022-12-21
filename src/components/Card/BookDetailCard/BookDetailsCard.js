@@ -62,15 +62,15 @@ const DetailsCard = connect(  mapStateToProps,  mapDispatchToProps,)(props => {
     <ScrollView style={styles.background}>
       <View style={styles.MainContainer}>
         <View style={styles.InfoContainer}>
-          <ImageBackground
+          {/* <ImageBackground
             source={{ uri: books.image }}
             style={styles.InfoImageBackgroundContainer}
             resizeMode="cover"
-          />
+          /> */}
           <View style={styles.InfoImageBackground}></View>
 
           {/* Navigation header */}
-          <View style={styles.InfoNavbarContainer}>
+          {/* <View style={styles.InfoNavbarContainer}>
             <TouchableOpacity style={styles.InfoImageBackground} onPress={() => navigation.goBack()}>
               <Image source={icons.back_arrow_icon} resizeMode="contain" style={styles.InfoImageBackgroundImage} />
             </TouchableOpacity>
@@ -82,7 +82,7 @@ const DetailsCard = connect(  mapStateToProps,  mapDispatchToProps,)(props => {
             <TouchableOpacity style={styles.InfoImageBackground} onPress={() => console.log('Click More')}>
               <Image source={icons.more_icon} resizeMode="contain" style={styles.InfoNavbarMoreImage} />
             </TouchableOpacity>
-          </View>
+          </View> */}
 
 
           {/* Book Cover */}

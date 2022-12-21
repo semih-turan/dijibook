@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import DetailsCard from '~/components/Card/BookDetailCard';
+import DetailsCard from '~/components/Card/DetailsCard';
 import { Navigation } from '~/navigation';
 
 const Details = ({ route, navigation }) => {
