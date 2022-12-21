@@ -69,8 +69,8 @@ const DetailsCard = connect(  mapStateToProps,  mapDispatchToProps,)(props => {
           /> */}
           <View style={styles.InfoImageBackground}></View>
 
-          {/* Navigation header */}
-          {/* <View style={styles.InfoNavbarContainer}>
+          {/* Navigation header
+          <View style={styles.InfoNavbarContainer}>
             <TouchableOpacity style={styles.InfoImageBackground} onPress={() => navigation.goBack()}>
               <Image source={icons.back_arrow_icon} resizeMode="contain" style={styles.InfoImageBackgroundImage} />
             </TouchableOpacity>

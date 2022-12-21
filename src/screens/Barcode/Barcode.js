@@ -37,15 +37,13 @@ const App = connect(
         })();
     }, []);
 
-    const barcode_text = barcodes.map((barcode) => (barcode.displayValue));
-    console.log(barcode_text);
+    const barcode_text = barcodes.map((barcode) => (barcode.displayValue))[0];
+    const barcode_book=app.books?.filter(books => books.isbn.includes(barcode_text))[0];
 
-    const handleSelectedBook = barcode_text => {
-        setContentList(app.books?.filter(books => books.isbn.includes(barcode_text)));
-        console.log(app.books?.filter(barcode_text));
-        console.log("Book:"+books);
-        // navigation.navigate('Details', { books});
-    };
+    if (barcode_text?.length >5) {
+        navigation.navigate('Details',barcode_book);
+    }
+    
 
     return (
         device != null &&
@@ -66,7 +64,7 @@ const App = connect(
                 <TouchableOpacity
                     onPressIn={() => setTakePhotoButtonPressed(true)}
                     onPressOut={() => setTakePhotoButtonPressed(false)}
-                    onPress={handleSelectedBook}
+                    onPress={() => handleSelectedBook(barcode.displayValue)}
                     style={takePhotoButtonPressed ? styles.takePhotoButtonPressed : styles.takePhotoButton}
                 />
             </>
