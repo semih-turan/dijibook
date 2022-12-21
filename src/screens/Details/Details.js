@@ -4,6 +4,7 @@ import { Navigation } from '~/navigation';
 
 const Details = ({ route, navigation }) => {
   const book = route.params;
+  console.log(book);
   const handleOnPress = () => {
     navigation.navigate('AddBook');
   };
