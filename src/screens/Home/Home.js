@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { FlatList, View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import BookCard from '~/components/Card/BookCard';
+import BookHomeCard from '~/components/Card/BookHomeCard';
+
 import styles from './Home.style';
 import Button from '~/components/Button';
 import { colors } from '~/themes';
@@ -25,7 +27,7 @@ const Home = connect(
   useEffect(() => {
     dispatch(requestAllProducts());
   }, []);
-  const renderContent = ({ item }) => <BookCard book={item} onPress={() => handleOnPress(item)} />;
+  const renderContent = ({ item }) => <BookHomeCard book={item} onPress={() => handleOnPress(item)} />;
   // Firebase'den alınan kitap verisi entegre edildiğinde aşağıdaki kod kullanılabilir.
   const handleSelectedBook = category => {
     setContentList(app.books?.filter(books => books.category.includes(category)));
@@ -60,7 +62,7 @@ const Home = connect(
           </ScrollView>
         </View>
         <View style={styles.flatlist}>
-          <FlatList data={!!contentList.length ? contentList : app.books} renderItem={renderContent} numColumns={2} />
+          <FlatList data={!!contentList.length ? contentList : app.books} renderItem={renderContent} />
         </View>
       </View>
     </View>
