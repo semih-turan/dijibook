@@ -8,8 +8,15 @@ import { Navigation } from '~/navigation';
 import store from '~/redux';
 
 import { colors } from './themes';
+import { useEffect } from 'react';
+import { NotificationServices, requestUserPermission } from './screens/natification';
 
 const App = props => {
+  useEffect(()=>{
+    requestUserPermission();
+    NotificationServices();
+  },[])
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.white }}>
       <Provider store={store}>
