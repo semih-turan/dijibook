@@ -1,18 +1,15 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import { text } from '~/configs';
 import { colors } from '~/themes';
+import { FONTS, COLORS, SIZES, icons } from '~/constants';
+
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 export default StyleSheet.create({
-  topContainer: {
-    backgroundColor: colors.white,
-  },
-  container: {
-    marginHorizontal: width * 0.05,
-    backgroundColor: colors.white,
-  },
+  topContainer: { flex: 1, backgroundColor: COLORS.gray1 },
+  container: { flex: 1, backgroundColor: COLORS.gray },
   category: {
     flexDirection: 'row',
   },
@@ -30,7 +27,7 @@ export default StyleSheet.create({
     color: colors.black,
     borderColor: colors.black,
   },
-  flatlist: {},
+  flatlist: { marginTop: SIZES.padding },
   active: {
     color: colors.orange,
     borderColor: colors.orange,
