@@ -38,9 +38,7 @@ export const NotificationServices=()=>{
         );
     });
     //Foreground Message Handling
-    messaging().onMessage(async remoteMessage => {
-        console.log('Notification in Forground',remoteMessage);
-    });
+    
 
     // Check whether an initial notification is available
     messaging()

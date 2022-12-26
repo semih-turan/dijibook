@@ -9,7 +9,8 @@ import store from '~/redux';
 
 import { colors } from './themes';
 import { useEffect } from 'react';
-import { NotificationServices, requestUserPermission } from './screens/natification';
+import { NotificationServices, requestUserPermission } from './utils/natification';
+import ForegroundHandler from './utils/ForegroundHandler';
 
 const App = props => {
   useEffect(()=>{
@@ -19,6 +20,7 @@ const App = props => {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.white }}>
+      <ForegroundHandler />
       <Provider store={store}>
         <Navigation />
         <FlashMessage position="top" />
