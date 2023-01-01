@@ -34,6 +34,10 @@ const Home = connect(
     setActiveNames(category);
   };
 
+  const itemSeparatorComponent = () => {
+    return <View style={{  paddingVertical: 20, margin:5, borderRadius: 5, backgroundColor: 'rgba(0,0,0,0.3)' }} />;
+  };
+
   return (
     <View style={styles.topContainer}>
       <View style={styles.container}>
@@ -62,7 +66,10 @@ const Home = connect(
           </ScrollView>
         </View>
         <View style={styles.flatlist}>
-          <FlatList data={!!contentList.length ? contentList : app.books} renderItem={renderContent} />
+          <FlatList data={!!contentList.length ? contentList : app.books} renderItem={renderContent} ItemSeparatorComponent={
+            (() => (<View style={{ borderBottomWidth: 1, borderColor: 'rgba(0,0,0,0.2)' }} />
+            ))
+          } />
         </View>
       </View>
     </View>
